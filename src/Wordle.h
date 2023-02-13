@@ -16,8 +16,16 @@ namespace wordle {
 		unsigned int current_round_{};
 		std::vector<std::string> all_words_;
 		unsigned int all_words_number_{};
+		bool win_{};
+
 		void set_new_word();
 		void welcome_user();
 		void game_loop();
+		bool check_word(std::string word);
+
+		void win();
+		void lose();
+
+		const unsigned int MAX_ROUNDS = 5;
 	};
 }
