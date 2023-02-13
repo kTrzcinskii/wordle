@@ -18,4 +18,9 @@ namespace terminal_manager {
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(miliseconds));
 	}
+
+	void TerminalManager::pause()
+	{
+		system("pause");
+	}
 }
