@@ -128,6 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\TerminalManager.cpp" />
+    <ClCompile Include="src\Wordle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\TerminalManager.h" />
+    <ClInclude Include="src\Wordle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
