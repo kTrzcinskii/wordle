@@ -27,5 +27,12 @@ namespace wordle {
 		void lose();
 
 		const unsigned int MAX_ROUNDS = 5;
+		const size_t WORD_LEN = 5;
+
+		enum LetterOption {
+			WRONG,
+			SOMEWHERE_ELSE,
+			CORRECT,
+		};
 	};
 }

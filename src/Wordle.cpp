@@ -60,6 +60,9 @@ namespace wordle {
 	void Wordle::game_loop()
 	{
 		tm.clear_terminal();
+
+		//TODO: delete this line later, only for testing
+		std::cout << current_word_;
 		while (current_round_ < MAX_ROUNDS)
 		{
 			tm.change_color(tm.White);
@@ -92,8 +95,59 @@ namespace wordle {
 
 	bool Wordle::check_word(std::string word)
 	{
-		//TODO:
-		return false;
+		if (word.length() != WORD_LEN) return false;
+		LetterOption* match = new LetterOption[WORD_LEN] {}; //here we store information about the letter
+		//it can be CORRECT(green), SOMEWHERE_ELSE(yellow) or WRONG(red)
+
+		bool* already_used = new bool[WORD_LEN] {}; //in this array we store the information if a letter has been already used
+		//it's useful when checking if a letter is SOMEWHERE_ELSE, as there could be 2 or more same letters in one word
+
+		for (size_t i = 0; i < WORD_LEN; i++)
+		{
+			if (current_word_[i] == word[i])
+			{
+				match[i] = CORRECT;
+				already_used[i] = true;
+			}
+		}
+
+		bool all_correct = true;
+		for (size_t i = 0; i < WORD_LEN; i++) if (match[i] != CORRECT) all_correct = false;
+
+		if (!all_correct)
+		{
+			for (size_t i = 0; i < WORD_LEN; i++)
+			{
+				if (match[i] != CORRECT)
+				{
+					char c = word[i];
+					bool somewhere_else{};
+					for (size_t j = 0; j < WORD_LEN; j++)
+					{
+						if (c == current_word_[j] && !already_used[j])
+						{
+							match[i] = SOMEWHERE_ELSE;
+							already_used[j] = true;
+							somewhere_else = true;
+						}
+					}
+					if (!somewhere_else) match[i] = WRONG;
+				}
+			}
+		}
+
+		//TODO: change this loop to print the word to the terminal with according font color
+		for (int i = 0; i < WORD_LEN; i++)
+		{
+			if (match[i] == CORRECT) std::cout << std::to_string(i) +  " - CORRECT\n";
+			if (match[i] == SOMEWHERE_ELSE) std::cout<< std::to_string(i) + " - SOMEWHERE_ELSE\n";
+			if (match[i] == WRONG) std::cout<< std::to_string(i) + " - WRONG\n";
+		}
+
+		delete[] match;
+		delete[] already_used;
+
+		return all_correct;
 	}
 
 	void Wordle::win()
