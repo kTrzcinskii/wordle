@@ -10,6 +10,8 @@ namespace terminal_manager {
 			Green = 2,
 			Yellow = 14,
 			Red = 12,
+			Cyan = 3,
+			Violet = 9,
 		};
 
 		void change_color(Colors color);
