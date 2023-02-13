@@ -16,6 +16,7 @@ namespace terminal_manager {
 
 		void change_color(Colors color);
 		void clear_terminal();
+		void sleep_for(unsigned int miliseconds);
 
 	private:
 		HANDLE hConsole_ = GetStdHandle(STD_OUTPUT_HANDLE);
