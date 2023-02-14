@@ -1,8 +1,9 @@
 #include <iostream>
+#include "Wordle.h"
 
 int main()
 {
-	std::cout << "Welcome to wordle!\n";
-
+	wordle::Wordle game;
+	game.start();
 	return 0;
 }
