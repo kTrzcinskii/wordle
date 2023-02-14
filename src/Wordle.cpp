@@ -12,10 +12,6 @@ namespace wordle {
 		tm.change_color(tm.Cyan);
 		std::cout << "Loading data...\n";
 		tm.sleep_for(300);
-
-		//TODO: add option to select between those files
-
-		//std::ifstream file("./res/words.txt");
 		std::ifstream file("./res/words_short.txt");
 		std::string temp;
 		while (std::getline(file, temp))
@@ -55,8 +51,6 @@ namespace wordle {
 	void Wordle::game_loop()
 	{
 		tm.clear_terminal();
-		//TODO: delete this line later, only for testing
-		std::cout << current_word_;
 		while (current_round_ < MAX_ROUNDS)
 		{
 			tm.change_color(tm.White);
