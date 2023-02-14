@@ -55,24 +55,12 @@ namespace wordle {
 	void Wordle::game_loop()
 	{
 		tm.clear_terminal();
-
 		//TODO: delete this line later, only for testing
 		std::cout << current_word_;
 		while (current_round_ < MAX_ROUNDS)
 		{
 			tm.change_color(tm.White);
-			std::string word;
-			std::cout << "\nEnter word: ";
-			//todo:
-			//check if a given string is only alpha and exactly 5 letters
-			std::cin >> std::ws; //delete any whitespaces
-			//when user entered 1 via cin to restart game the \n is left in memory, so we have to delete it
-			std::getline(std::cin, word);
-
-			//TODO:::
-			//here i want to call
-			//get_correct_word()
-
+			std::string word = get_correct_word();
 			current_round_++;
 			bool check = check_word(word);
 			if (check)
@@ -222,9 +210,33 @@ namespace wordle {
 		std::cout << "\nSee you next time!\n\n";
 	}
 
-	void Wordle::get_correct_word()
+	std::string Wordle::get_correct_word()
 	{
-		//TODO:
+		std::string word;
+		std::cout << "\nEnter word: ";
+		std::cin >> std::ws; //delete whitespaces
+		std::getline(std::cin, word);
+		while (!is_valid_word(word))
+		{
+			tm.change_color(tm.Red);
+			std::cout << "\nThe word you provided is incorrect!\n";
+			tm.change_color(tm.Yellow);
+			std::cout << "It must consist of exactly 5 lowercase letters.\n";
+			tm.change_color(tm.White);
+			std::cout << "\nEnter word: ";
+			std::getline(std::cin, word);
+		}
+		return word;
+	}
+
+	bool Wordle::is_valid_word(std::string word)
+	{
+		if (word.length() != 5) return false;
+		for (const auto& letter : word)
+		{
+			if (!islower(letter)) return false;
+		}
+		return true;
 	}
 
 	void Wordle::get_correct_number()
