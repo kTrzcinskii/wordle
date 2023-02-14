@@ -8,8 +8,6 @@ namespace wordle {
 	public:
 		Wordle();
 		void start();
-		void stop();
-		void reset();
 	private:
 		std::string user_{};
 		std::string current_word_{};
@@ -25,6 +23,11 @@ namespace wordle {
 
 		void win();
 		void lose();
+		void stop();
+		void reset();
+
+		void get_correct_word();
+		void get_correct_number();
 
 		const unsigned int MAX_ROUNDS = 5;
 		const size_t WORD_LEN = 5;
