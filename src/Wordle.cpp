@@ -41,11 +41,6 @@ namespace wordle {
 		tm.sleep_for(500);
 		tm.clear_terminal();
 		tm.change_color(tm.White);
-		std::cout << "\nHello ";
-		tm.change_color(tm.Violet);
-		std::cout << user_;
-		tm.change_color(tm.White);
-		std::cout << "\nLet the game begin!\n";
  	}
 
 	void Wordle::set_new_word()
@@ -70,7 +65,14 @@ namespace wordle {
 			std::cout << "\nEnter word: ";
 			//todo:
 			//check if a given string is only alpha and exactly 5 letters
+			std::cin >> std::ws; //delete any whitespaces
+			//when user entered 1 via cin to restart game the \n is left in memory, so we have to delete it
 			std::getline(std::cin, word);
+
+			//TODO:::
+			//here i want to call
+			//get_correct_word()
+
 			current_round_++;
 			bool check = check_word(word);
 			if (check)
@@ -89,8 +91,17 @@ namespace wordle {
 		if (win_) win();
 		else lose();
 
-		//TODO:
-		//options to reset and exit
+		std::cout << "What do you want to do now?\n";
+		std::cout << "1) Play again\n";
+		std::cout << "2) Exit\n";
+		std::cout << "Enter number: ";
+		
+		//TODO: check if given number is 1 or 2
+		//by calling get_correct_number()
+		int choice{};
+		std::cin >> choice;
+		if (choice == 1) reset();
+		else stop();
 	}
 
 	bool Wordle::check_word(std::string word)
@@ -182,7 +193,14 @@ namespace wordle {
 	void Wordle::start()
 	{
 		welcome_user();
+		reset();
+	}
 
+	void Wordle::reset()
+	{
+		current_round_ = 0;
+		win_ = false;
+		tm.clear_terminal();
 		tm.change_color(tm.Cyan);
 		std::cout << "\nSelecting a word for you...\n\n";
 		tm.sleep_for(500);
@@ -193,5 +211,20 @@ namespace wordle {
 		tm.pause();
 
 		game_loop();
+	}
+
+	void Wordle::stop()
+	{
+		//TODO
+	}
+
+	void Wordle::get_correct_word()
+	{
+		//TODO:
+	}
+
+	void Wordle::get_correct_number()
+	{
+		//TODO
 	}
 }
