@@ -71,13 +71,13 @@ namespace wordle {
 			//todo:
 			//check if a given string is only alpha and exactly 5 letters
 			std::getline(std::cin, word);
+			current_round_++;
 			bool check = check_word(word);
 			if (check)
 			{
 				win_ = true;
 				break;
 			}
-			current_round_++;
 			int tries_left = MAX_ROUNDS - current_round_;
 			if (tries_left <= 1) tm.change_color(tm.Red);
 			else if (tries_left < MAX_ROUNDS / 2 + 1) tm.change_color(tm.Yellow);
@@ -153,12 +153,30 @@ namespace wordle {
 
 	void Wordle::win()
 	{
-		//TODO
+		std::cout << "\n\nCongratulations ";
+		tm.change_color(tm.Violet);
+		std::cout << user_;
+		tm.change_color(tm.White);
+		std::cout << "!\nYou successfully guessed word \"";
+		tm.change_color(tm.Yellow);
+		std::cout<< current_word_;
+		tm.change_color(tm.White);
+		std::cout << "\"\nIt took you ";
+		tm.change_color(tm.Cyan);
+		std::cout << current_round_;
+		tm.change_color(tm.White);
+		if (current_round_ == 1) std::cout << " try.\n";
+		else std::cout << " tries.\n";
 	}
 
 	void Wordle::lose()
 	{
-		//TODO
+		std::cout << "\n\nUnfortunately, you didn't manage to guess the word.\n";
+		std::cout << "The word you were looking for was \"";
+		tm.change_color(tm.Red);
+		std::cout << current_word_;
+		tm.change_color(tm.White);
+		std::cout << "\"\n";
 	}
 
 	void Wordle::start()
