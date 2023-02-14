@@ -215,7 +215,11 @@ namespace wordle {
 
 	void Wordle::stop()
 	{
-		//TODO
+		std::cout << "I hope you enjoy your game ";
+		tm.change_color(tm.Violet);
+		std::cout << user_;
+		tm.change_color(tm.White);
+		std::cout << "\nSee you next time!\n\n";
 	}
 
 	void Wordle::get_correct_word()
