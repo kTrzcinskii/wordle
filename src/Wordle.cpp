@@ -82,12 +82,8 @@ namespace wordle {
 		std::cout << "What do you want to do now?\n";
 		std::cout << "1) Play again\n";
 		std::cout << "2) Exit\n";
-		std::cout << "Enter number: ";
 		
-		//TODO: check if given number is 1 or 2
-		//by calling get_correct_number()
-		int choice{};
-		std::cin >> choice;
+		int choice = get_correct_number();
 		if (choice == 1) reset();
 		else stop();
 	}
@@ -239,8 +235,26 @@ namespace wordle {
 		return true;
 	}
 
-	void Wordle::get_correct_number()
+	int Wordle::get_correct_number()
 	{
-		//TODO
+		std::string num;
+		std::cout << "\nEnter number: ";
+		std::getline(std::cin, num);
+		while (!is_valid_number(num))
+		{
+			tm.change_color(tm.Red);
+			std::cout << "\nThe number you provided is incorrect!\n";
+			tm.change_color(tm.Yellow);
+			std::cout << "It must be 1 or 2.\n";
+			tm.change_color(tm.White);
+			std::cout << "\nEnter number: ";
+			std::getline(std::cin, num);
+		}
+		return std::stoi(num);
+	}
+
+	bool Wordle::is_valid_number(std::string n)
+	{
+		return n == "1" || n == "2";
 	}
 }

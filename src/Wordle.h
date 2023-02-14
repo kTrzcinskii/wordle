@@ -29,7 +29,8 @@ namespace wordle {
 		std::string get_correct_word();
 		bool is_valid_word(std::string word);
 
-		void get_correct_number();
+		int get_correct_number();
+		bool is_valid_number(std::string num);
 
 		const unsigned int MAX_ROUNDS = 5;
 		const size_t WORD_LEN = 5;
