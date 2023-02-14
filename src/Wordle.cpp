@@ -81,7 +81,7 @@ namespace wordle {
 			int tries_left = MAX_ROUNDS - current_round_;
 			if (tries_left <= 1) tm.change_color(tm.Red);
 			else if (tries_left < MAX_ROUNDS / 2 + 1) tm.change_color(tm.Yellow);
-			std::cout << "\nYou have " + std::to_string(tries_left);
+			std::cout << "\n\nYou have " + std::to_string(tries_left);
 			if (tries_left == 1) std::cout << " try left!\n";
 			else std::cout << " tries left!\n";
 			tm.change_color(tm.White);
@@ -136,13 +136,14 @@ namespace wordle {
 			}
 		}
 
-		//TODO: change this loop to print the word to the terminal with according font color
 		for (int i = 0; i < WORD_LEN; i++)
 		{
-			if (match[i] == CORRECT) std::cout << std::to_string(i) +  " - CORRECT\n";
-			if (match[i] == SOMEWHERE_ELSE) std::cout<< std::to_string(i) + " - SOMEWHERE_ELSE\n";
-			if (match[i] == WRONG) std::cout<< std::to_string(i) + " - WRONG\n";
+			if (match[i] == CORRECT) tm.change_color(tm.Green);
+			if (match[i] == SOMEWHERE_ELSE) tm.change_color(tm.Yellow);
+			if (match[i] == WRONG) tm.change_color(tm.Red);
+			std::cout << word[i];
 		}
+		tm.change_color(tm.White);
 
 		delete[] match;
 		delete[] already_used;
